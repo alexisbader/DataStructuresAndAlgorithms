@@ -99,11 +99,11 @@ bool BinarySearchTree::exists(DataType val) const {
         if(curr->val == val) {
             return true;
         }
-        // If val is larger, move right
+            // If val is larger, move right
         else if (curr->val < val) {
             curr = curr->right;
         }
-        // If val is smaller, move left
+            // If val is smaller, move left
         else if (curr->val > val)
             curr = curr->left;
     }
@@ -178,17 +178,18 @@ Node* findPredecessor(Node* ptr) {
 }
 
 bool BinarySearchTree::remove(DataType val) {
-   //Ensure that the val exists in the tree
-    if(exists(val) == false) {
+
+    // Ensure that the val exists in the tree
+    if (exists(val) == false) {
         return false;
     }
+
     // If the root is the only element in the tree
-    if(size_ == 1) {
+    if (size_ == 1) {
+
         delete root_;
         root_ = NULL;
-        // Decrement size
         size_--;
-        // Successful
         return true;
     }
 
@@ -203,7 +204,7 @@ bool BinarySearchTree::remove(DataType val) {
         if (val > curr->val) {
             curr = curr->right;
         }
-        // if val is smaller, move to the left
+            // if val is smaller, move to the left
         else {
             curr = curr->left;
         }
@@ -211,7 +212,6 @@ bool BinarySearchTree::remove(DataType val) {
 
     // If it is a leaf node, remove it from the tree
     if(curr->left == NULL && curr->right == NULL) {
-        delete curr;
         // Check which child the target node is, and set that pointer to NULL
         if(prev->right == curr && prev-> right != NULL) {
             prev->right = NULL;
@@ -219,6 +219,8 @@ bool BinarySearchTree::remove(DataType val) {
         else {
             prev->left = NULL;
         }
+        delete curr;
+
         // Decrement size
         size_--;
         // Successful
@@ -257,14 +259,14 @@ bool BinarySearchTree::remove(DataType val) {
             prev->right = curr->left;
         }
     }
-    // The node has one child to the right
+        // The node has one child to the right
     else  {
         // The curr node is a left child of its parent
         if(prev->left == curr) {
             // Make the parent point at the child's child
             prev->left = curr->right;
         }
-        // The curr node is a right child of the parent
+            // The curr node is a right child of the parent
         else {
             // Make the parent point at the child's child
             prev->right = curr->right;
